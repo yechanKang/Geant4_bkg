@@ -276,7 +276,7 @@ G4bool GasGapSensitiveDetector::ProcessHits(G4Step *step, G4TouchableHistory *)
     //_________________________________________________________________________
 
 
-    if(volName == "GasGap1" || volName == "GasGap2") {
+    if(volName == "GasGap1" || volName == "GasGap2" && trackIndex != 1) {
         // we're in one of the gaps
 
         for(G4int T=0;T< ttTrack.size();T++){
@@ -294,6 +294,9 @@ G4bool GasGapSensitiveDetector::ProcessHits(G4Step *step, G4TouchableHistory *)
             // G4cout<<trackIndex <<" trackIndex pdg "<<pdg<<" genprocess "<<genprocess<<G4endl;
             if(pdg == 11 || pdg == -11){
                 TrGEMAnalysis::GetInstance()->SaveGenRegion(parentIndex ,genprocess, genvolume);
+            }
+            if(parentIndex == 1){
+                TrGEMAnalysis::GetInstance()->SaveNeutron(genprocess, genvolume);
             }
         }  
 

@@ -65,6 +65,8 @@ class TrGEMAnalysis {
 
         void SaveSecondary(const G4Track* track);
 
+        void SaveNeutron(G4String genprocess, G4String genvolume);        
+
     private:
 
         TrGEMAnalysis();
@@ -154,6 +156,11 @@ class TrGEMAnalysis {
         
         G4int vecProcNo ;
         G4bool neutronSensitivity ;
+
+
+        //For Neutron Data
+        std::vector<std::string> neutronGenProcess;
+        std::vector<std::string> neutronGenVolume;
 
         // GARFIELD quantities
         std::vector<G4int>    pdgCode ;

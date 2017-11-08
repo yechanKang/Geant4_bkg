@@ -110,6 +110,9 @@ void TrGEMAnalysis::PrepareNewEvent(const G4Event* /*anEvent*/)
     secondaryParticle.clear();
     // gammaContainer.clear();
     secondaryGammaE.clear();
+
+    neutronGenProcess.clear();
+    neutronGenVolume.clear();
 }
 
 void TrGEMAnalysis::PrepareNewRun(const G4Run* /*aRun*/)
@@ -202,6 +205,10 @@ void TrGEMAnalysis::PrepareNewRun(const G4Run* /*aRun*/)
     
     t->Branch("postTrackPart",&ppostTrackPart);
     t->Branch("postTrackEne",&ppostTrackEne);
+
+    t->Branch("neutronGenProcess", &neutronGenProcess);
+    t->Branch("neutronGenVolume", &neutronGenVolume);
+    
     
 
     g = new TTree("Garfield","Interesting variables for Garfield") ;
@@ -497,4 +504,9 @@ void TrGEMAnalysis::SaveSecondary(const G4Track* track){
     if(track->GetParticleDefinition()->GetPDGEncoding() == 22){
         secondaryGammaE.push_back(track->GetKineticEnergy()/keV);
     }
+}
+
+void TrGEMAnalysis::SaveNeutron(G4String genprocess, G4String genvolume){
+    neutronGenProcess.push_back(genprocess);
+    neutronGenVolume.push_back(genvolume);
 }
